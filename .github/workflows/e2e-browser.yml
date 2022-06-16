@@ -13,7 +13,7 @@ jobs:
     if: ${{github.event.deployment_status.state == 'success'}}
     if: github.actor != 'dependabot[bot]'
     steps:
-    - uses: actions/checkout@v2.3.4
+    - uses: actions/checkout@v3
     - name: Use Node.js 16.x
       uses: actions/setup-node@v2.1.5
       with:
