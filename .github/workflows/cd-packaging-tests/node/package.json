@@ -1,0 +1,7 @@
+{
+  "name": "cd-packaging-test-node",
+  "private": true,
+  "dependencies": {
+    "@inrupt/template-ts": "0.0.2"
+  }
+}
