@@ -191,7 +191,7 @@ jobs:
         VERSION_NR: ${{ needs.publish-npm.outputs.version-nr }}
     - name: Archive Parcel build artifacts
       if: github.actor != 'dependabot[bot]'
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.1.0
       continue-on-error: true
       with:
         name: parcel-dist
@@ -216,7 +216,7 @@ jobs:
       env:
         VERSION_NR: ${{ needs.publish-npm.outputs.version-nr }}
     - name: Archive Webpack build artifacts
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v3.1.0
       continue-on-error: true
       if: github.actor != 'dependabot[bot]'
       with:
