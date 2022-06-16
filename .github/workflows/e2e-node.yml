@@ -1,0 +1,67 @@
+name: End-to-end Tests (Node)
+
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  CI: true
+
+jobs:
+  e2e-node:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    if: ${{github.event.deployment_status.state == 'success'}}
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: 16.x
+    - name: Cache node modules
+      uses: actions/cache@v2.1.7
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node${{ runner.node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+    - run: npm run build
+    - run: npm run test:e2e:node
+      env:
+        E2E_TEST_ESS_NOTIFICATION_GATEWAY: ${{secrets.E2E_TEST_ESS_PROD_NOTIFICATION_GATEWAY}}
+        E2E_TEST_ESS_POD: ${{ secrets.E2E_TEST_ESS_PROD_POD }}
+        E2E_TEST_ESS_IDP_URL: ${{ secrets.E2E_TEST_ESS_PROD_IDP_URL }}
+        E2E_TEST_ESS_REFRESH_TOKEN: ${{ secrets.E2E_TEST_ESS_PROD_REFRESH_TOKEN }}
+        E2E_TEST_ESS_CLIENT_ID: ${{ secrets.E2E_TEST_ESS_PROD_CLIENT_ID }}
+        E2E_TEST_ESS_CLIENT_SECRET: ${{ secrets.E2E_TEST_ESS_PROD_CLIENT_SECRET }}
+    - name: Add status check with successful test result
+      id: set-status-check-success
+      uses: octokit/request-action@v2.x
+      with:
+        route: POST /repos/:repository/statuses/:ref
+        repository: ${{ github.repository }}
+        ref: ${{ github.sha }}
+        state: success
+        context: 'End-to-end tests (node)'
+        description: 'Node.js template-ts end-to-end tests'
+        target_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}?check_suite_focus=true
+        # The deployment runs in parallel with CI, so status checks will never have succeeded yet:
+        required_contexts: "[]"
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    - name: Add status check with failed test result
+      id: set-status-check-failure
+      if: failure()
+      uses: octokit/request-action@v2.x
+      with:
+        route: POST /repos/:repository/statuses/:ref
+        repoitory: ${{ github.repository }}
+        ref: ${{ github.sha }}
+        state: failure
+        context: 'End-to-end tests (node)'
+        description: 'Node.js template-ts end-to-end tests'
+        target_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}?check_suite_focus=true
+        # The deployment runs in parallel with CI, so status checks will never have succeeded yet:
+        required_contexts: "[]"
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
