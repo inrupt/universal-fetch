@@ -61,7 +61,7 @@
     "dotenv-flow": "^3.2.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^23.20.0",
