@@ -50,7 +50,7 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
     - name: Prepare for publication to npm
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v3
       with:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
@@ -105,7 +105,7 @@ jobs:
     needs: [prepare-deployment, publish-npm]
     steps:
     - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.5
+    - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
@@ -127,7 +127,7 @@ jobs:
     needs: [prepare-deployment, publish-npm]
     steps:
     - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.5
+    - uses: actions/setup-node@v3
       with:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
@@ -147,7 +147,7 @@ jobs:
     needs: [prepare-deployment, publish-npm]
     steps:
     - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.5
+    - uses: actions/setup-node@v3
       with:
         node-version: '16.x'
         registry-url: 'https://registry.npmjs.org'
@@ -173,7 +173,7 @@ jobs:
     needs: [prepare-deployment, publish-npm]
     steps:
     - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.5
+    - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
