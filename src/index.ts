@@ -29,9 +29,5 @@ const uniFetch =
     : (require("undici") as typeof undici);
 
 export default uniFetch.fetch as typeof globalThis.fetch;
-export const {
-  fetch,
-  Request,
-  Response,
-  Headers,
-} = uniFetch as typeof globalThis;
+export const { fetch, Request, Response, Headers } =
+  uniFetch as typeof globalThis;

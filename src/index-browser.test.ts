@@ -22,10 +22,10 @@
 // In the browser environment we always expect fetch
 // and the related globals to exist.
 
-globalThis.fetch = ((() => {}) as unknown) as typeof fetch;
-globalThis.Headers = ((() => {}) as unknown) as typeof Headers;
-globalThis.Request = ((() => {}) as unknown) as typeof Request;
-globalThis.Response = ((() => {}) as unknown) as typeof Response;
+globalThis.fetch = (() => {}) as unknown as typeof fetch;
+globalThis.Headers = (() => {}) as unknown as typeof Headers;
+globalThis.Request = (() => {}) as unknown as typeof Request;
+globalThis.Response = (() => {}) as unknown as typeof Response;
 
 // We need to set the globals before importing the library
 // as this changes whether the library will use the global

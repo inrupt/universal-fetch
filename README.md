@@ -6,11 +6,10 @@ In browsers this library will always re-export the existing fetch function from 
 
 In Node.js environments the library first checks if `fetch` is globally available ([as is the case in Node 18](https://nodejs.org/uk/blog/announcements/v18-release-announce/), and as is being back-ported into Node 16) then the global `fetch` is used. Otherwise, the `fetch` function exported by [undici](https://www.npmjs.com/package/undici) is used.
 
-
 ## Usage
 
 ```ts
-import fetch, { Headers, Request, Response } from '@inrupt/universal-fetch';
+import fetch, { Headers, Request, Response } from "@inrupt/universal-fetch";
 
 const response = await fetch(url);
 ```
