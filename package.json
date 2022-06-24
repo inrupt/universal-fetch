@@ -43,8 +43,7 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
-    },
-    "./module": "./dist/module/index.mjs"
+    }
   },
   "files": [
     "dist",
@@ -99,6 +98,7 @@
   },
   "browser": {
     "dist/index.js": "dist/index-browser.js",
-    "dist/index.es.js": "dist/index-browser.es.js"
+    "dist/index.es.js": "dist/index-browser.es.js",
+    "dist/index.mjs": "dist/index-browser.mjs"
   }
 }
