@@ -1,5 +1,5 @@
 const {
   sampleModuleFn,
-} = require("@inrupt/template-ts");
+} = require("@inrupt/universal-fetch");
 
 console.log(sampleModuleFn());

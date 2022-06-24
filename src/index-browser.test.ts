@@ -18,10 +18,36 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import sampleModuleFn from "./index";
 
-describe("sampleModuleFn", () => {
-  it("returns the expected value", () => {
-    expect(sampleModuleFn()).toEqual("Hello, world- from a module.");
+// In the browser environment we always expect fetch
+// and the related globals to exist.
+// @ts-ignore
+globalThis.fetch = () => {};
+// @ts-ignore
+globalThis.Headers = () => {};
+// @ts-ignore
+globalThis.Request = () => {};
+// @ts-ignore
+globalThis.Response = () => {};
+
+import * as uniFetch from "./index-browser";
+
+describe("exports", () => {
+  it("Should always have fetch, headers, request and response as functions", () => {
+    expect(uniFetch.fetch).toBeInstanceOf(Function);
+    expect(uniFetch.Headers).toBeInstanceOf(Function);
+    expect(uniFetch.Request).toBeInstanceOf(Function);
+    expect(uniFetch.Response).toBeInstanceOf(Function);
   });
-});
+
+  it("Should equal the globals when they are defined", () => {
+    expect(uniFetch.fetch).toEqual(fetch);
+    expect(uniFetch.Headers).toEqual(Headers);
+    expect(uniFetch.Request).toEqual(Request);
+    expect(uniFetch.Response).toEqual(Response);
+  });
+
+  it("Should have default export as fetch", () => {
+    expect(uniFetch.default).toEqual(uniFetch.fetch);
+  });
+})

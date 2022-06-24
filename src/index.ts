@@ -18,7 +18,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+import type * as undici from 'undici';
 
-// Ignore the "prefer default" rule; index files won't export a default.
-/* eslint import/prefer-default-export: 0 */
-export { default as sampleModuleFn } from "./module";
+const uniFetch = (
+    typeof globalThis.fetch === 'function' &&
+    typeof globalThis.Headers === 'function' &&
+    typeof globalThis.Request === 'function' &&
+    typeof globalThis.Response === 'function'
+  ) ? globalThis : require('undici') as typeof undici;
+
+export default uniFetch.fetch as typeof globalThis.fetch;
+export const fetch = uniFetch.fetch as typeof globalThis.fetch;
+export const Request = uniFetch.Request as typeof globalThis.Request;
+export const Response = uniFetch.Response as typeof globalThis.Response;
+export const Headers = uniFetch.Headers as typeof globalThis.Headers;

@@ -18,6 +18,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+// Testing for node version < 14.x
+// @ts-ignore
+delete globalThis.fetch;
+// @ts-ignore
+delete globalThis.Headers;
+// @ts-ignore
+delete globalThis.Request;
+// @ts-ignore
+delete globalThis.Response;
+
 import * as uniFetch from "./index";
 
 describe("exports", () => {
@@ -32,4 +43,12 @@ describe("exports", () => {
   it("Should have default export as fetch", () => {
     expect(uniFetch.default).toEqual(uniFetch.fetch);
   });
-})
+
+  it("Should not equal the globals when they are not defined", () => {
+    expect(uniFetch.default).not.toEqual(globalThis.fetch);
+    expect(uniFetch.fetch).not.toEqual(globalThis.fetch);
+    expect(uniFetch.Headers).not.toEqual(globalThis.Headers);
+    expect(uniFetch.Request).not.toEqual(globalThis.Request);
+    expect(uniFetch.Response).not.toEqual(globalThis.Response);
+  });
+});

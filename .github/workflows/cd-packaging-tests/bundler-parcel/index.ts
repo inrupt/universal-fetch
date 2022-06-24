@@ -1,3 +1,3 @@
-import { sampleModuleFn } from "@inrupt/template-ts";
+import { sampleModuleFn } from "@inrupt/universal-fetch";
 
 console.log(sampleModuleFn());

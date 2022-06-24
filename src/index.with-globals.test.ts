@@ -18,6 +18,19 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+// In the Node 18.x we always expect fetch
+// and the related globals to exist.
+// This is testing for that case
+// @ts-ignore
+globalThis.fetch = () => {};
+// @ts-ignore
+globalThis.Headers = () => {};
+// @ts-ignore
+globalThis.Request = () => {};
+// @ts-ignore
+globalThis.Response = () => {};
+
 import * as uniFetch from "./index";
 
 describe("exports", () => {
@@ -32,4 +45,12 @@ describe("exports", () => {
   it("Should have default export as fetch", () => {
     expect(uniFetch.default).toEqual(uniFetch.fetch);
   });
-})
+
+  it("Should equal the globals when they are defined", () => {
+    expect(uniFetch.default).toEqual(fetch);
+    expect(uniFetch.fetch).toEqual(fetch);
+    expect(uniFetch.Headers).toEqual(Headers);
+    expect(uniFetch.Request).toEqual(Request);
+    expect(uniFetch.Response).toEqual(Response);
+  });
+});

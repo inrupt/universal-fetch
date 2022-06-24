@@ -60,7 +60,7 @@ jobs:
         npm publish --access public
         echo "Package published. To install, run:"
         echo ""
-        echo "    npm install @inrupt/template-ts"
+        echo "    npm install @inrupt/universal-fetch"
       env:
         NODE_AUTH_TOKEN: ${{ secrets.INRUPT_NPM_TOKEN }}
     - name: Mark GitHub Deployment as successful
@@ -70,8 +70,8 @@ jobs:
         repository: ${{ github.repository }}
         deployment: ${{ needs.prepare-deployment.outputs.deployment-id }}
         environment: review
-        environment_url: 'https://www.npmjs.com/package/@inrupt/template-ts/v/${GITHUB_REF#refs/tags/v}'
-        description: "Published to npm. To install, run: npm install @inrupt/template-ts@${GITHUB_REF#refs/tags/v}"
+        environment_url: 'https://www.npmjs.com/package/@inrupt/universal-fetch/v/${GITHUB_REF#refs/tags/v}'
+        description: "Published to npm. To install, run: npm install @inrupt/universal-fetch@${GITHUB_REF#refs/tags/v}"
         log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         mediaType: '{"previews": ["flash", "ant-man"]}'
         state: success
@@ -109,10 +109,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
-    - name: Install the preview release of template-ts in the packaging test project
+    - name: Install the preview release of universal-fetch in the packaging test project
       run: |
         cd .github/workflows/cd-packaging-tests/node
-        npm install @inrupt/template-ts
+        npm install @inrupt/universal-fetch
     - name: Verify that the package can be imported in Node from a CommonJS module
       run: |
         cd .github/workflows/cd-packaging-tests/node
@@ -134,7 +134,7 @@ jobs:
     - name: Verify that the package can be imported in a Parcel project
       run: |
         cd .github/workflows/cd-packaging-tests/bundler-parcel
-        npm install @inrupt/template-ts
+        npm install @inrupt/universal-fetch
         npx parcel build index.ts
     - name: Archive Parcel build artifacts
       uses: actions/upload-artifact@v2.3.1
@@ -154,7 +154,7 @@ jobs:
     - name: Verify that the package can be imported in a Webpack project
       run: |
         cd .github/workflows/cd-packaging-tests/bundler-webpack
-        npm install @inrupt/template-ts
+        npm install @inrupt/universal-fetch
         npm install webpack@5 webpack-cli buffer
         npx webpack --devtool source-map
     - name: Archive Webpack build artifacts
@@ -178,17 +178,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci
-    - name: Install the preview release of template-ts
+    - name: Install the preview release of universal-fetch
       # The `--force` allows us to install it even though our own package has the same name.
       # See https://docs.npmjs.com/cli/v6/commands/npm-install#limitations-of-npms-install-algorithm
       run: |
-        npm install --force @inrupt/template-ts
+        npm install --force @inrupt/universal-fetch
     - name: Make sure that the end-to-end tests run against the just-published package
       run: |
         cd e2e/node
         # For all files (`-type f`) in this directory,
-        # replace `../index` (i.e. in the import statement) with `@inrupt/template-ts`:
-        find ./ -type f -exec sed --in-place --expression='s/\.\.\/index/@inrupt\/template-ts/g' {} \;
+        # replace `../index` (i.e. in the import statement) with `@inrupt/universal-fetch`:
+        find ./ -type f -exec sed --in-place --expression='s/\.\.\/index/@inrupt\/universal-fetch/g' {} \;
     - name: Run the Node-based end-to-end tests
       run: npm run test:e2e:node
       env:

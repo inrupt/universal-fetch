@@ -98,7 +98,7 @@ jobs:
         if [ -n $NODE_AUTH_TOKEN ]; then npm publish --access public --tag "$TAG_SLUG"; fi
         if [ -n $NODE_AUTH_TOKEN ]; then echo "Package published. To install, run:"; fi
         if [ -n $NODE_AUTH_TOKEN ]; then echo ""; fi
-        if [ -n $NODE_AUTH_TOKEN ]; then echo "    npm install @inrupt/template-ts@$TAG_SLUG"; fi
+        if [ -n $NODE_AUTH_TOKEN ]; then echo "    npm install @inrupt/universal-fetch@$TAG_SLUG"; fi
       env:
         NODE_AUTH_TOKEN: ${{ secrets.INRUPT_NPM_TOKEN }}
         TAG_SLUG: ${{ needs.prepare-deployment.outputs.tag-slug }}
@@ -110,8 +110,8 @@ jobs:
         repository: ${{ github.repository }}
         deployment: ${{ needs.prepare-deployment.outputs.deployment-id }}
         environment: review
-        environment_url: 'https://www.npmjs.com/package/@inrupt/template-ts/v/${{ needs.prepare-deployment.outputs.tag-slug }}'
-        description: "Published to npm. To install, run: npm install @inrupt/template-ts@${{ needs.prepare-deployment.outputs.tag-slug }}"
+        environment_url: 'https://www.npmjs.com/package/@inrupt/universal-fetch/v/${{ needs.prepare-deployment.outputs.tag-slug }}'
+        description: "Published to npm. To install, run: npm install @inrupt/universal-fetch@${{ needs.prepare-deployment.outputs.tag-slug }}"
         log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         mediaType: '{"previews": ["flash", "ant-man"]}'
         state: success
@@ -150,11 +150,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: 'https://registry.npmjs.org'
-    - name: Install the preview release of template-ts in the packaging test project
+    - name: Install the preview release of universal-fetch in the packaging test project
       if: github.actor != 'dependabot[bot]'
       run: |
         cd .github/workflows/cd-packaging-tests/node
-        npm install @inrupt/template-ts@$VERSION_NR
+        npm install @inrupt/universal-fetch@$VERSION_NR
       env:
         VERSION_NR: ${{ needs.publish-npm.outputs.version-nr }}
     - name: Verify that the package can be imported in Node from a CommonJS module
@@ -184,7 +184,7 @@ jobs:
       run: |
         cd .github/workflows/cd-packaging-tests/bundler-parcel
         npm install
-        npm install @inrupt/template-ts@$VERSION_NR
+        npm install @inrupt/universal-fetch@$VERSION_NR
         # pin the version: https://github.com/parcel-bundler/parcel/issues/5943
         npx parcel@1.12.3 build index.ts
       env:
@@ -210,7 +210,7 @@ jobs:
       if: github.actor != 'dependabot[bot]'
       run: |
         cd .github/workflows/cd-packaging-tests/bundler-webpack
-        npm install @inrupt/template-ts@$VERSION_NR
+        npm install @inrupt/universal-fetch@$VERSION_NR
         npm install
         npx webpack --devtool source-map
       env:
