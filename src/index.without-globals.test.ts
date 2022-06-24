@@ -18,6 +18,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+
+// Testing for node version < 14.x
+delete (globalThis as Partial<typeof globalThis>).fetch;
+delete (globalThis as Partial<typeof globalThis>).Headers;
+delete (globalThis as Partial<typeof globalThis>).Request;
+delete (globalThis as Partial<typeof globalThis>).Response;
+
+// We need to set the globals before importing the library
+// as this changes whether the library will use the global
+// fetch or import it from undici
+// eslint-disable-next-line import/first
 import * as uniFetch from "./index";
 
 describe("exports", () => {
@@ -31,5 +42,13 @@ describe("exports", () => {
 
   it("Should have default export as fetch", () => {
     expect(uniFetch.default).toEqual(uniFetch.fetch);
+  });
+
+  it("Should not equal the globals when they are not defined", () => {
+    expect(uniFetch.default).not.toEqual(globalThis.fetch);
+    expect(uniFetch.fetch).not.toEqual(globalThis.fetch);
+    expect(uniFetch.Headers).not.toEqual(globalThis.Headers);
+    expect(uniFetch.Request).not.toEqual(globalThis.Request);
+    expect(uniFetch.Response).not.toEqual(globalThis.Response);
   });
 });

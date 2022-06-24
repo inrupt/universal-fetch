@@ -18,15 +18,34 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import * as uniFetch from "./index";
+
+// In the browser environment we always expect fetch
+// and the related globals to exist.
+
+globalThis.fetch = (() => {}) as unknown as typeof fetch;
+globalThis.Headers = (() => {}) as unknown as typeof Headers;
+globalThis.Request = (() => {}) as unknown as typeof Request;
+globalThis.Response = (() => {}) as unknown as typeof Response;
+
+// We need to set the globals before importing the library
+// as this changes whether the library will use the global
+// fetch or import it from undici
+// eslint-disable-next-line import/first
+import * as uniFetch from "./index-browser";
 
 describe("exports", () => {
   it("Should always have fetch, headers, request and response as functions", () => {
-    expect(uniFetch.default).toBeInstanceOf(Function);
     expect(uniFetch.fetch).toBeInstanceOf(Function);
     expect(uniFetch.Headers).toBeInstanceOf(Function);
     expect(uniFetch.Request).toBeInstanceOf(Function);
     expect(uniFetch.Response).toBeInstanceOf(Function);
+  });
+
+  it("Should equal the globals when they are defined", () => {
+    expect(uniFetch.fetch).toEqual(fetch);
+    expect(uniFetch.Headers).toEqual(Headers);
+    expect(uniFetch.Request).toEqual(Request);
+    expect(uniFetch.Response).toEqual(Response);
   });
 
   it("Should have default export as fetch", () => {

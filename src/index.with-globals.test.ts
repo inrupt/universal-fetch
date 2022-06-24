@@ -18,6 +18,19 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+
+// In the Node 18.x we always expect fetch
+// and the related globals to exist.
+// This is testing for that case
+globalThis.fetch = (() => {}) as unknown as typeof fetch;
+globalThis.Headers = (() => {}) as unknown as typeof Headers;
+globalThis.Request = (() => {}) as unknown as typeof Request;
+globalThis.Response = (() => {}) as unknown as typeof Response;
+
+// We need to set the globals before importing the library
+// as this changes whether the library will use the global
+// fetch or import it from undici
+// eslint-disable-next-line import/first
 import * as uniFetch from "./index";
 
 describe("exports", () => {
@@ -31,5 +44,13 @@ describe("exports", () => {
 
   it("Should have default export as fetch", () => {
     expect(uniFetch.default).toEqual(uniFetch.fetch);
+  });
+
+  it("Should equal the globals when they are defined", () => {
+    expect(uniFetch.default).toEqual(fetch);
+    expect(uniFetch.fetch).toEqual(fetch);
+    expect(uniFetch.Headers).toEqual(Headers);
+    expect(uniFetch.Request).toEqual(Request);
+    expect(uniFetch.Response).toEqual(Response);
   });
 });

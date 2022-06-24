@@ -18,18 +18,5 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import * as uniFetch from "./index";
-
-describe("exports", () => {
-  it("Should always have fetch, headers, request and response as functions", () => {
-    expect(uniFetch.default).toBeInstanceOf(Function);
-    expect(uniFetch.fetch).toBeInstanceOf(Function);
-    expect(uniFetch.Headers).toBeInstanceOf(Function);
-    expect(uniFetch.Request).toBeInstanceOf(Function);
-    expect(uniFetch.Response).toBeInstanceOf(Function);
-  });
-
-  it("Should have default export as fetch", () => {
-    expect(uniFetch.default).toEqual(uniFetch.fetch);
-  });
-});
+export default globalThis.fetch;
+export const { fetch, Response, Request, Headers } = globalThis;
