@@ -19,15 +19,75 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 import type * as undici from "undici";
+import type * as nodeFetch from "node-fetch";
 
-const uniFetch =
-  typeof globalThis.fetch === "function" &&
-  typeof globalThis.Headers === "function" &&
-  typeof globalThis.Request === "function" &&
-  typeof globalThis.Response === "function"
-    ? globalThis
-    : (require("undici") as typeof undici);
+interface Fetch {
+  fetch: typeof globalThis.fetch;
+  Headers: typeof globalThis.Headers;
+  Request: typeof globalThis.Request;
+  Response: typeof globalThis.Response;
+}
 
-export default uniFetch.fetch as typeof globalThis.fetch;
-export const { fetch, Request, Response, Headers } =
-  uniFetch as typeof globalThis;
+function supportsFetch(pkg: any): pkg is Fetch {
+  return typeof pkg.fetch === "function" &&
+    typeof pkg.Headers === "function" &&
+    typeof pkg.Request === "function" &&
+    typeof pkg.Response === "function"
+}
+
+// if (supportsFetch(globalThis)) {
+//   module.exports = 
+// } else if (
+
+// )
+
+
+
+// const uniFetch =
+//   typeof globalThis.fetch === "function" &&
+//   typeof globalThis.Headers === "function" &&
+//   typeof globalThis.Request === "function" &&
+//   typeof globalThis.Response === "function"
+//     ? globalThis
+//     : (require("undici") as typeof undici);
+
+// export default uniFetch.fetch as typeof globalThis.fetch;
+// export const { fetch, Request, Response, Headers } =
+//   uniFetch as typeof globalThis;
+
+
+
+// import type * as undici from "undici";
+// import * as nodeFetch from "node-fetch";
+
+// if (typeof globalThis.fetch === )
+
+
+
+// interface Fetch {
+//   fetch: typeof fetch;
+//   Headers: typeof Headers;
+//   Request: typeof Request;
+//   Response: typeof Response;
+// }
+
+// function supportsFetch(pkg: any): pkg is Fetch {
+//   return typeof pkg.fetch === "function" &&
+//     typeof pkg.Headers === "function" &&
+//     typeof pkg.Request === "function" &&
+//     typeof pkg.Response === "function"
+// }
+
+const uniFetch: Fetch = supportsFetch(globalThis)
+  ? globalThis
+  : supportsFetch(require("undici"))
+    ? (require("undici") as typeof undici)
+    : {
+      fetch: require("node-fetch").default as typeof nodeFetch.default,
+      Headers: require("node-fetch").Headers as typeof nodeFetch.Headers,
+      Request: require("node-fetch").Request as typeof nodeFetch.Request,
+      Response: require("node-fetch").Response as typeof nodeFetch.Response
+    };
+
+export default uniFetch.fetch;
+export const { fetch, Request, Response, Headers } = uniFetch;

@@ -82,6 +82,7 @@
     "*.{ts,tsx,js,jsx,css,md,mdx}": "prettier --write"
   },
   "dependencies": {
+    "node-fetch": "^3.2.6",
     "undici": "^5.5.1"
   },
   "browser": {
