@@ -18,7 +18,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import type * as undici from "undici";
 import type * as nodeFetch from "node-fetch";
 
 interface Fetch {
@@ -28,64 +27,26 @@ interface Fetch {
   Response: typeof globalThis.Response;
 }
 
-function supportsFetch(pkg: any): pkg is Fetch {
+function supportsFetch(pkg: Partial<Fetch>): pkg is Fetch {
   return typeof pkg.fetch === "function" &&
     typeof pkg.Headers === "function" &&
     typeof pkg.Request === "function" &&
     typeof pkg.Response === "function"
 }
 
-// if (supportsFetch(globalThis)) {
-//   module.exports = 
-// } else if (
-
-// )
-
-
-
-// const uniFetch =
-//   typeof globalThis.fetch === "function" &&
-//   typeof globalThis.Headers === "function" &&
-//   typeof globalThis.Request === "function" &&
-//   typeof globalThis.Response === "function"
-//     ? globalThis
-//     : (require("undici") as typeof undici);
-
-// export default uniFetch.fetch as typeof globalThis.fetch;
-// export const { fetch, Request, Response, Headers } =
-//   uniFetch as typeof globalThis;
-
-
-
-// import type * as undici from "undici";
-// import * as nodeFetch from "node-fetch";
-
-// if (typeof globalThis.fetch === )
-
-
-
-// interface Fetch {
-//   fetch: typeof fetch;
-//   Headers: typeof Headers;
-//   Request: typeof Request;
-//   Response: typeof Response;
-// }
-
-// function supportsFetch(pkg: any): pkg is Fetch {
-//   return typeof pkg.fetch === "function" &&
-//     typeof pkg.Headers === "function" &&
-//     typeof pkg.Request === "function" &&
-//     typeof pkg.Response === "function"
-// }
-
+// We are ignoring coverage here because in Node 18 fetch functionalities are globally available
+// and hence the second turnery is not checked.
+/* istanbul ignore next */
 const uniFetch: Fetch = supportsFetch(globalThis)
   ? globalThis
   : supportsFetch(require("undici"))
-    ? (require("undici") as typeof undici)
+    // TODO: Type this as undici once it has the same type signature as the globals
+    ? require("undici")
+    // TODO: Fix this type casting once node-fetch has the same type signature as the globals
     : {
-      fetch: require("node-fetch").default as typeof nodeFetch.default,
-      Headers: require("node-fetch").Headers as typeof nodeFetch.Headers,
-      Request: require("node-fetch").Request as typeof nodeFetch.Request,
+      fetch: require("node-fetch").default as typeof globalThis.fetch,
+      Headers: require("node-fetch").Headers as typeof globalThis.Headers,
+      Request: require("node-fetch").Request as typeof globalThis.Request,
       Response: require("node-fetch").Response as typeof nodeFetch.Response
     };
 
