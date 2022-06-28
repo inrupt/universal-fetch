@@ -18,7 +18,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import type * as nodeFetch from "node-fetch";
 
 interface Fetch {
   fetch: typeof globalThis.fetch;
@@ -49,7 +48,7 @@ const uniFetch: Fetch = supportsFetch(globalThis)
       fetch: require("node-fetch").default as typeof globalThis.fetch,
       Headers: require("node-fetch").Headers as typeof globalThis.Headers,
       Request: require("node-fetch").Request as typeof globalThis.Request,
-      Response: require("node-fetch").Response as typeof nodeFetch.Response,
+      Response: require("node-fetch").Response as typeof globalThis.Response,
     };
 
 export default uniFetch.fetch;
