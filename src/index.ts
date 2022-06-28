@@ -28,10 +28,12 @@ interface Fetch {
 }
 
 function supportsFetch(pkg: Partial<Fetch>): pkg is Fetch {
-  return typeof pkg.fetch === "function" &&
+  return (
+    typeof pkg.fetch === "function" &&
     typeof pkg.Headers === "function" &&
     typeof pkg.Request === "function" &&
     typeof pkg.Response === "function"
+  );
 }
 
 // We are ignoring coverage here because in Node 18 fetch functionalities are globally available
@@ -40,14 +42,14 @@ function supportsFetch(pkg: Partial<Fetch>): pkg is Fetch {
 const uniFetch: Fetch = supportsFetch(globalThis)
   ? globalThis
   : supportsFetch(require("undici"))
-    // TODO: Type this as undici once it has the same type signature as the globals
-    ? require("undici")
-    // TODO: Fix this type casting once node-fetch has the same type signature as the globals
-    : {
+  ? // TODO: Type this as undici once it has the same type signature as the globals
+    require("undici")
+  : // TODO: Fix this type casting once node-fetch has the same type signature as the globals
+    {
       fetch: require("node-fetch").default as typeof globalThis.fetch,
       Headers: require("node-fetch").Headers as typeof globalThis.Headers,
       Request: require("node-fetch").Request as typeof globalThis.Request,
-      Response: require("node-fetch").Response as typeof nodeFetch.Response
+      Response: require("node-fetch").Response as typeof nodeFetch.Response,
     };
 
 export default uniFetch.fetch;
