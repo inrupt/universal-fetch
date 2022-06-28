@@ -18,16 +18,38 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-import type * as undici from "undici";
 
-const uniFetch =
-  typeof globalThis.fetch === "function" &&
-  typeof globalThis.Headers === "function" &&
-  typeof globalThis.Request === "function" &&
-  typeof globalThis.Response === "function"
-    ? globalThis
-    : (require("undici") as typeof undici);
+interface Fetch {
+  fetch: typeof globalThis.fetch;
+  Headers: typeof globalThis.Headers;
+  Request: typeof globalThis.Request;
+  Response: typeof globalThis.Response;
+}
 
-export default uniFetch.fetch as typeof globalThis.fetch;
-export const { fetch, Request, Response, Headers } =
-  uniFetch as typeof globalThis;
+function supportsFetch(pkg: Partial<Fetch>): pkg is Fetch {
+  return (
+    typeof pkg.fetch === "function" &&
+    typeof pkg.Headers === "function" &&
+    typeof pkg.Request === "function" &&
+    typeof pkg.Response === "function"
+  );
+}
+
+// We are ignoring coverage here because in Node 18 fetch functionalities are globally available
+// and hence the second turnery is not checked.
+/* istanbul ignore next */
+const uniFetch: Fetch = supportsFetch(globalThis)
+  ? globalThis
+  : supportsFetch(require("undici"))
+  ? // TODO: Type this as undici once it has the same type signature as the globals
+    require("undici")
+  : // TODO: Fix this type casting once node-fetch has the same type signature as the globals
+    {
+      fetch: require("node-fetch").default as typeof globalThis.fetch,
+      Headers: require("node-fetch").Headers as typeof globalThis.Headers,
+      Request: require("node-fetch").Request as typeof globalThis.Request,
+      Response: require("node-fetch").Response as typeof globalThis.Response,
+    };
+
+export default uniFetch.fetch;
+export const { fetch, Request, Response, Headers } = uniFetch;

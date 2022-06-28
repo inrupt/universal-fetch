@@ -8,5 +8,6 @@ module.exports = {
     "no-shadow": "off",
     "global-require": "off",
     "@typescript-eslint/no-var-requires": "off",
+    "no-nested-ternary": "off",
   },
 };
