@@ -3,27 +3,27 @@ import dFetch, { fetch, Headers, Request, Response } from "@inrupt/universal-fet
 // Verify that submodule imports work:
 import idFetch, { fetch as iFetch, Headers as iHeaders, Request as iRequest, Response as iResponse } from "@inrupt/universal-fetch/index";
 
-console.log(new Request("https://vincentt.inrupt.net/profile/card#me"));
+console.log(new Request("https://inrupt.com/"));
 console.log(new Response());
 console.log(new Headers())
 
-fetch("https://vincentt.inrupt.net/profile/card#me").then(data => {
+fetch("https://inrupt.com/").then(data => {
   console.log(data);
 })
 
-dFetch("https://vincentt.inrupt.net/profile/card#me").then(data => {
+dFetch("https://inrupt.com/").then(data => {
   console.log(data);
 })
 
-console.log(new iRequest("https://vincentt.inrupt.net/profile/card#me"));
+console.log(new iRequest("https://inrupt.com/"));
 console.log(new iResponse());
 console.log(new iHeaders())
 
-iFetch("https://vincentt.inrupt.net/profile/card#me").then(data => {
+iFetch("https://inrupt.com/").then(data => {
   console.log(data);
 })
 
-idFetch("https://vincentt.inrupt.net/profile/card#me").then(data => {
+idFetch("https://inrupt.com/").then(data => {
   console.log(data);
 })
 

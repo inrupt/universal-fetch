@@ -6,10 +6,10 @@ const {
 } = require("@inrupt/universal-fetch");
 
 
-console.log(new Request("https://vincentt.inrupt.net/profile/card#me"));
+console.log(new Request("https://inrupt.com/"));
 console.log(new Response());
 console.log(new Headers())
 
-fetch("https://vincentt.inrupt.net/profile/card#me").then(data => {
+fetch("https://inrupt.com/").then(data => {
   console.log(data);
 })
