@@ -44,7 +44,7 @@ if (supportsFetch(globalThis)) {
   uniFetch = globalThis;
 } else if (supportsFetch(require("undici"))) {
   // TODO: Type this as undici once it has the same type signature as the globals
-  uniFetch = require('undici');
+  uniFetch = require("undici");
 } else {
   // TODO: Fix this type casting once node-fetch has the same type signature as the globals
   uniFetch = {
@@ -52,7 +52,7 @@ if (supportsFetch(globalThis)) {
     Headers: require("node-fetch").Headers as typeof globalThis.Headers,
     Request: require("node-fetch").Request as typeof globalThis.Request,
     Response: require("node-fetch").Response as typeof globalThis.Response,
-  }
+  };
 }
 
 export default uniFetch.fetch;
