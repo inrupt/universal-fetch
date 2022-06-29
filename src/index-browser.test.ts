@@ -35,17 +35,19 @@ import * as uniFetch from "./index-browser";
 
 describe("exports", () => {
   it("Should always have fetch, headers, request and response as functions", () => {
-    expect(uniFetch.fetch).toBeInstanceOf(Function);
-    expect(uniFetch.Headers).toBeInstanceOf(Function);
-    expect(uniFetch.Request).toBeInstanceOf(Function);
-    expect(uniFetch.Response).toBeInstanceOf(Function);
+    expect(typeof uniFetch.default).toBe("function");
+    expect(typeof uniFetch.fetch).toBe("function");
+    expect(typeof uniFetch.Headers).toBe("function");
+    expect(typeof uniFetch.Request).toBe("function");
+    expect(typeof uniFetch.Response).toBe("function");
   });
 
   it("Should equal the globals when they are defined", () => {
-    expect(uniFetch.fetch).toEqual(fetch);
-    expect(uniFetch.Headers).toEqual(Headers);
-    expect(uniFetch.Request).toEqual(Request);
-    expect(uniFetch.Response).toEqual(Response);
+    expect(typeof uniFetch.default).toBe("function");
+    expect(typeof uniFetch.fetch).toBe("function");
+    expect(typeof uniFetch.Headers).toBe("function");
+    expect(typeof uniFetch.Request).toBe("function");
+    expect(typeof uniFetch.Response).toBe("function");
   });
 
   it("Should have default export as fetch", () => {

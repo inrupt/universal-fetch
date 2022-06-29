@@ -21,7 +21,7 @@
 
 module.exports = {
   preset: "ts-jest",
-  testEnvironment: "jsdom",
+  testEnvironment: "node",
   clearMocks: true,
   collectCoverage: true,
   coverageReporters: ["text"],

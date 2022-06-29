@@ -22,14 +22,14 @@ import * as uniFetch from "./index";
 
 describe("exports", () => {
   it("Should always have fetch, headers, request and response as functions", () => {
-    expect(uniFetch.default).toBeInstanceOf(Function);
-    expect(uniFetch.fetch).toBeInstanceOf(Function);
-    expect(uniFetch.Headers).toBeInstanceOf(Function);
-    expect(uniFetch.Request).toBeInstanceOf(Function);
-    expect(uniFetch.Response).toBeInstanceOf(Function);
+    expect(typeof uniFetch.default).toBe("function");
+    expect(typeof uniFetch.fetch).toBe("function");
+    expect(typeof uniFetch.Headers).toBe("function");
+    expect(typeof uniFetch.Request).toBe("function");
+    expect(typeof uniFetch.Response).toBe("function");
   });
 
   it("Should have default export as fetch", () => {
-    expect(uniFetch.default).toEqual(uniFetch.fetch);
+    expect(typeof uniFetch.default).toBe("function");
   });
 });

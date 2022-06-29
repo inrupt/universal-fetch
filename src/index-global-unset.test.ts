@@ -18,39 +18,22 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
-// In the Node 18.x we always expect fetch
-// and the related globals to exist.
-// This is testing for that case
-globalThis.fetch = (() => {}) as unknown as typeof fetch;
-globalThis.Headers = (() => {}) as unknown as typeof Headers;
-globalThis.Request = (() => {}) as unknown as typeof Request;
-globalThis.Response = (() => {}) as unknown as typeof Response;
-
-// We need to set the globals before importing the library
-// as this changes whether the library will use the global
-// fetch or import it from undici
-// eslint-disable-next-line import/first
 import * as uniFetch from "./index";
+
+// Testing that the deletion of the global after the import
+// does not affect the imported functions
+delete (globalThis as any).fetch;
 
 describe("exports", () => {
   it("Should always have fetch, headers, request and response as functions", () => {
-    expect(uniFetch.default).toBeInstanceOf(Function);
-    expect(uniFetch.fetch).toBeInstanceOf(Function);
-    expect(uniFetch.Headers).toBeInstanceOf(Function);
-    expect(uniFetch.Request).toBeInstanceOf(Function);
-    expect(uniFetch.Response).toBeInstanceOf(Function);
+    expect(typeof uniFetch.default).toBe("function");
+    expect(typeof uniFetch.fetch).toBe("function");
+    expect(typeof uniFetch.Headers).toBe("function");
+    expect(typeof uniFetch.Request).toBe("function");
+    expect(typeof uniFetch.Response).toBe("function");
   });
 
   it("Should have default export as fetch", () => {
-    expect(uniFetch.default).toEqual(uniFetch.fetch);
-  });
-
-  it("Should equal the globals when they are defined", () => {
-    expect(uniFetch.default).toEqual(fetch);
-    expect(uniFetch.fetch).toEqual(fetch);
-    expect(uniFetch.Headers).toEqual(Headers);
-    expect(uniFetch.Request).toEqual(Request);
-    expect(uniFetch.Response).toEqual(Response);
+    expect(typeof uniFetch.default).toBe("function");
   });
 });
