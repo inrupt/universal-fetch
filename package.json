@@ -11,6 +11,8 @@
     "lint:prettier": "prettier '**/*.{ts,tsx,js,jsx,css,md,mdx}' --ignore-path .gitignore",
     "test": "npm run test:unit",
     "test:unit": "jest --roots src --",
+    "licenses:list": "npx license-checker --production --csv --out LICENSE_DEPENDENCIES_ALL",
+    "licenses:check": "npx license-checker --production --failOn \"AGPL-1.0-only; AGPL-1.0-or-later; AGPL-3.0-only; AGPL-3.0-or-later; Beerware; CC-BY-NC-1.0; CC-BY-NC-2.0; CC-BY-NC-2.5; CC-BY-NC-3.0; CC-BY-NC-4.0; CC-BY-NC-ND-1.0; CC-BY-NC-ND-2.0; CC-BY-NC-ND-2.5; CC-BY-NC-ND-3.0; CC-BY-NC-ND-4.0; CC-BY-NC-SA-1.0; CC-BY-NC-SA-2.0; CC-BY-NC-SA-2.5; CC-BY-NC-SA-3.0; CC-BY-NC-SA-4.0; CPAL-1.0; EUPL-1.0; EUPL-1.1; EUPL-1.1;  GPL-1.0-only; GPL-1.0-or-later; GPL-2.0-only;  GPL-2.0-or-later; GPL-3.0; GPL-3.0-only; GPL-3.0-or-later; SISSL;  SISSL-1.2; WTFPL\"",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -62,7 +64,6 @@
     "dotenv-flow": "^3.2.0",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
-    "license-checker": "^25.0.1",
     "prettier": "2.7.1",
     "rollup": "^2.75.7",
     "rollup-plugin-typescript2": "^0.32.1",
