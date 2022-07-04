@@ -26,23 +26,18 @@ interface Fetch {
   Response: typeof globalThis.Response;
 }
 
-function supportsFetch(pkg: Partial<Fetch>): pkg is Fetch {
-  return (
-    typeof pkg.fetch === "function" &&
-    typeof pkg.Headers === "function" &&
-    typeof pkg.Request === "function" &&
-    typeof pkg.Response === "function"
-  );
-}
+const nodeVersion = process.versions.node.split('.')
+const nodeMajor = Number(nodeVersion[0])
+const nodeMinor = Number(nodeVersion[1])
 
 let uniFetch: Fetch;
 
 // We are ignoring coverage here because in Node 18 fetch functionalities are globally available
 // and hence the else statement is never reached.
 /* istanbul ignore else */
-if (supportsFetch(globalThis)) {
+if (nodeMajor >= 18) {
   uniFetch = globalThis;
-} else if (supportsFetch(require("undici"))) {
+} else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 5)) {
   // TODO: Type this as undici once it has the same type signature as the globals
   uniFetch = require("undici");
 } else {
