@@ -26,9 +26,9 @@ interface Fetch {
   Response: typeof globalThis.Response;
 }
 
-const nodeVersion = process.versions.node.split('.')
-const nodeMajor = Number(nodeVersion[0])
-const nodeMinor = Number(nodeVersion[1])
+const nodeVersion = process.versions.node.split(".");
+const nodeMajor = Number(nodeVersion[0]);
+const nodeMinor = Number(nodeVersion[1]);
 
 let uniFetch: Fetch;
 
