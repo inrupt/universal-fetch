@@ -11,6 +11,5 @@ module.exports = {
     ],
     "global-require": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "no-nested-ternary": "off",
   },
 };
