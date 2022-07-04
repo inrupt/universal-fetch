@@ -70,18 +70,6 @@
       // (i.e. public API's that should be documented) should be listed here:
       "src/index.ts",
     ],
-    "exclude": [
-      "node_modules/**",
-      "**/*.test.ts",
-      // Internal helpers:
-      "**/*.internal.ts",
-      // End-to-end tests:
-      "src/e2e-*/**",
-      // Re-exported functions are already documented in their own modules:
-      "src/index.ts",
-      // Constants are only used internally:
-      "src/constants.ts",
-    ],
     "theme": "markdown",
     "readme": "none",
     "entryDocument": "index.md",
