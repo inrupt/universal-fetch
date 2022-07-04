@@ -32,9 +32,9 @@ const nodeMinor = Number(nodeVersion[1]);
 
 let uniFetch: Fetch;
 
-// We are ignoring coverage here because in Node 18 fetch functionalities are globally available
-// and hence the else statement is never reached.
-/* istanbul ignore else */
+// Each branch is pre-determined based on node version and hence any test on a given node version will
+// not reach a particular branch.
+/* istanbul ignore next */
 if (nodeMajor >= 18) {
   uniFetch = globalThis;
 } else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 5)) {
