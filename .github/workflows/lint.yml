@@ -1,8 +1,0 @@
-name: Lint
-
-on: [push]
-
-jobs:
-  lint:
-    # FIXME: use a fixed version after it has been released
-    uses: inrupt/javascript-style-configs/.github/workflows/reusable-lint.yml@main
