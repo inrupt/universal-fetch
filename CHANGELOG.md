@@ -8,18 +8,8 @@ The following changes have been implemented but not released yet:
 
 ### New features
 
-## [0.0.1] - 2021-03-04
+Introducing our fetch shim, where we use node-fetch as a polyfill on node 14,
+undici's fetch on node 16, and in browsers, we just expose the native fetch API.
 
-=======
-
-### Dependency change
-
-- Lorem Ipsum
-
-### Bugs fixed
-
-- Dolor sit anet
-
-### New features
-
-- And so on
+This package aims to replace our usage of cross-fetch and to become our go-to
+way of working with fetch across different environments.
