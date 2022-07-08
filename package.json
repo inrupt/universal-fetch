@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js",
     "clean": "rimraf umd dist",
+    "docs:build": "typedoc",
     "lint": "npm run lint:eslint -- --cache --fix && npm run lint:prettier -- --write",
     "lint:ci": "npm run lint:eslint && npm run lint:prettier -- --check",
     "lint:eslint": "eslint src",
