@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup --config rollup.config.js",
+    "clean": "rimraf umd dist",
     "lint": "npm run lint:eslint -- --cache --fix && npm run lint:prettier -- --write",
     "lint:ci": "npm run lint:eslint && npm run lint:prettier -- --check",
     "lint:eslint": "eslint src",
@@ -62,6 +63,7 @@
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
     "prettier": "2.7.1",
+    "rimraf": "^3.0.2",
     "rollup": "^2.75.7",
     "rollup-plugin-typescript2": "^0.32.1",
     "ts-jest": "^28.0.5",
