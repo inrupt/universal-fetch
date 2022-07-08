@@ -1,8 +1,6 @@
-e2e
 dist/*
 umd/*
 jest.config.js
-jest.e2e.config.js
-license-header.js
 rollup.config.js
 tsconfig.json
+eslintrc.js
