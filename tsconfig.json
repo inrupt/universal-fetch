@@ -16,15 +16,15 @@
     "stripInternal": true
   },
   "typedocOptions": {
-    "out": "docs/api/source/api",
+    "out": "docs/",
     "entryPoints": [
       // The source files of everything listed under `exports` in our package.json
       // (i.e. public API's that should be documented) should be listed here:
-      "src/index.ts",
+      "src/index.ts"
     ],
     "theme": "markdown",
     "readme": "none",
-    "entryDocument": "index.md",
+    "entryDocument": "index.md"
   },
   "include": ["src/**/*.ts", ".eslintrc.js"],
   "exclude": ["**/node_modules", "dist/*", "umd/*"]
