@@ -1,4 +1,6 @@
 {
+  // NOTE: This file can only contain single line comments due to it being
+  // imported in rollup.config.js
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
