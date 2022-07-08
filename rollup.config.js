@@ -21,41 +21,79 @@
 
 import pkg from "./package.json";
 import typescript from "rollup-plugin-typescript2";
+import { readFileSync } from "fs";
 
-export default {
-  input: "./src/index.ts",
-  output: [
-    {
-      file: pkg.main,
-      format: "cjs",
-    },
-    {
-      file: pkg.module,
-      entryFileNames: "[name].es.js",
-      format: "esm",
-    },
-    {
-      dir: "dist",
-      entryFileNames: "[name].mjs",
-      format: "esm",
-      preserveModules: true,
-    },
-    {
-      dir: "umd",
-      format: "umd",
-      name: "UniversalFetch",
-    },
-  ],
-  plugins: [
-    typescript({
-      // Use our own version of TypeScript, rather than the one bundled with the plugin:
-      typescript: require("typescript"),
-      tsconfigOverride: {
-        compilerOptions: {
-          module: "esnext",
-        },
+// Hack to be able to read tsconfig and append an excludes rule:
+// Note: this does only remove single line comments.
+const tsconfig = JSON.parse(
+  readFileSync("./tsconfig.json", "utf-8").replace(/^\s*\/\/\s.*$/gm, "")
+);
+
+const plugins = [
+  typescript({
+    // Use our own version of TypeScript, rather than the one bundled with the plugin:
+    typescript: require("typescript"),
+    tsconfigOverride: {
+      exclude: tsconfig.exclude.concat("src/**/*.test.ts"),
+      compilerOptions: {
+        module: "esnext",
+        removeComments: true,
       },
-    }),
-  ],
-  external: [],
-};
+    },
+  }),
+];
+
+export default [
+  {
+    input: "./src/index.ts",
+    output: [
+      {
+        file: pkg.main,
+        format: "cjs",
+        exports: "named",
+      },
+      {
+        file: pkg.module,
+        format: "esm",
+        exports: "named",
+      },
+      {
+        file: "dist/index.mjs",
+        format: "esm",
+        preserveModules: false,
+        exports: "named",
+      },
+    ],
+    plugins: plugins,
+    external: [],
+  },
+  {
+    input: "./src/index-browser.ts",
+    output: [
+      {
+        file: "dist/index-browser.js",
+        format: "cjs",
+        exports: "named",
+      },
+      {
+        file: "dist/index-browser.es.js",
+        format: "esm",
+        exports: "named",
+      },
+      {
+        file: "dist/index-browser.mjs",
+        format: "esm",
+        preserveModules: false,
+        exports: "named",
+      },
+      {
+        dir: "umd",
+        format: "umd",
+        name: "UniversalFetch",
+        exports: "named",
+      },
+    ],
+    plugins: plugins,
+    external: [],
+  },
+];
