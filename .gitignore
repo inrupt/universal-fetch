@@ -11,3 +11,4 @@ docs/dist/
 docs/.DS_Store
 .env*.local
 .cache
+.vscode/settings.json
