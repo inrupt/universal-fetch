@@ -43,7 +43,7 @@ export default {
     {
       dir: "umd",
       format: "umd",
-      name: "SolidClient",
+      name: "UniversalFetch",
     },
   ],
   plugins: [
