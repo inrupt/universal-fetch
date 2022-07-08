@@ -75,7 +75,5 @@
     "entryDocument": "index.md",
   },
   "include": ["src/**/*.ts", ".eslintrc.js"],
-  "exclude": [
-    "**/node_modules"
-  ]
+  "exclude": ["**/node_modules", "dist/*", "umd/*"]
 }
