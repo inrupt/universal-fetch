@@ -1,34 +1,35 @@
 {
-  "name": "@inrupt/template-ts",
-  "description": "A template repo for Inrupt TypeScript projects",
-  "version": "0.0.3",
+  "name": "@inrupt/universal-fetch",
+  "description": "A library to access fetch from any JavaScript / TypeScript environment",
+  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "build-api-docs": "typedoc",
-    "build-docs-preview-site": "npm run build-api-docs; cd docs/api; rm source/api/index.md; make html; cd ../; rm -r dist || true; mkdir -p dist/api; cp -r api/build/html/. dist/;",
+    "clean": "rimraf umd dist",
+    "docs:build": "typedoc",
     "lint": "npm run lint:eslint -- --cache --fix && npm run lint:prettier -- --write",
     "lint:ci": "npm run lint:eslint && npm run lint:prettier -- --check",
     "lint:eslint": "eslint src",
     "lint:prettier": "prettier '**/*.{ts,tsx,js,jsx,css,md,mdx}' --ignore-path .gitignore",
     "test": "npm run test:unit",
     "test:unit": "jest --roots src --",
-    "test:e2e": "npm run test:e2e:node && npm run test:e2e:browser",
-    "test:e2e:node": "jest --env=node --roots e2e/node --testTimeout=10000",
-    "test:e2e:browser": "testcafe",
-    "list-licenses": "license-checker --production --csv --out LICENSE_DEPENDENCIES_ALL",
-    "check-licenses": "license-checker --production --failOn \"AGPL-1.0-only; AGPL-1.0-or-later; AGPL-3.0-only; AGPL-3.0-or-later; Beerware; CC-BY-NC-1.0; CC-BY-NC-2.0; CC-BY-NC-2.5; CC-BY-NC-3.0; CC-BY-NC-4.0; CC-BY-NC-ND-1.0; CC-BY-NC-ND-2.0; CC-BY-NC-ND-2.5; CC-BY-NC-ND-3.0; CC-BY-NC-ND-4.0; CC-BY-NC-SA-1.0; CC-BY-NC-SA-2.0; CC-BY-NC-SA-2.5; CC-BY-NC-SA-3.0; CC-BY-NC-SA-4.0; CPAL-1.0; EUPL-1.0; EUPL-1.1; EUPL-1.1;  GPL-1.0-only; GPL-1.0-or-later; GPL-2.0-only;  GPL-2.0-or-later; GPL-3.0; GPL-3.0-only; GPL-3.0-or-later; SISSL;  SISSL-1.2; WTFPL\"",
-    "prepublishOnly": "npm run build",
-    "prepare": "husky install"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "rdf",
-    "solid",
-    "linked data",
-    "turtle"
+    "fetch",
+    "http",
+    "https",
+    "promise",
+    "request",
+    "curl",
+    "wget",
+    "xhr",
+    "whatwg",
+    "universal",
+    "isomorphic"
   ],
-  "homepage": "https://docs.inrupt.com/client-libraries/template-ts/",
-  "bugs": "https://github.com/inrupt/template-ts/issues",
+  "homepage": "https://docs.inrupt.com/client-libraries/universal-fetch/",
+  "bugs": "https://github.com/inrupt/universal-fetch/issues",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -36,8 +37,12 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
-    },
-    "./module": "./dist/module/index.mjs"
+    }
+  },
+  "browser": {
+    "dist/index.js": "dist/index-browser.js",
+    "dist/index.es.js": "dist/index-browser.es.js",
+    "dist/index.mjs": "dist/index-browser.mjs"
   },
   "files": [
     "dist",
@@ -47,42 +52,28 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/inrupt/template-ts.git"
+    "url": "https://github.com/inrupt/universal-fetch.git"
   },
   "devDependencies": {
-    "@inrupt/eslint-config-base": "^0.2.0-alpha.1",
-    "@inrupt/eslint-config-lib": "^0.3.0",
-    "@skypack/package-check": "^0.2.2",
-    "@testing-library/testcafe": "^4.2.3",
+    "@inrupt/eslint-config-lib": "^1.0.0",
+    "@rushstack/eslint-patch": "^1.1.4",
     "@types/dotenv-flow": "^3.2.0",
-    "@types/jest": "^26.0.24",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
+    "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.0",
     "dotenv-flow": "^3.2.0",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jest": "^23.20.0",
-    "eslint-plugin-license-header": "^0.4.0",
-    "eslint-plugin-prettier": "^3.4.1",
-    "fast-check": "^2.17.0",
-    "husky": "^5.0.9",
-    "jest": "^26.5.2",
-    "license-checker": "^25.0.1",
-    "lint-staged": "^10.2.9",
-    "prettier": "2.2.1",
-    "rollup": "^2.56.3",
-    "rollup-plugin-typescript2": "^0.31.1",
-    "testcafe": "^1.16.0",
-    "ts-jest": "^26.5.4",
-    "typedoc": "^0.22.11",
-    "typedoc-plugin-markdown": "^3.10.4",
-    "typescript": "^4.2.2"
+    "jest": "^28.1.2",
+    "jest-environment-node": "^28.1.2",
+    "prettier": "2.7.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.7",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "ts-jest": "^28.0.5",
+    "typedoc": "^0.23.2",
+    "typedoc-plugin-markdown": "^3.13.1",
+    "typescript": "^4.7.4"
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --cache --fix",
-    "*.{ts,tsx,js,jsx,css,md,mdx}": "prettier --write"
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "undici": "^5.6.0"
   }
 }
