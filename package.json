@@ -1,7 +1,7 @@
 {
   "name": "@inrupt/universal-fetch",
   "description": "A library to access fetch from any JavaScript / TypeScript environment",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "build": "rollup --config rollup.config.js",
