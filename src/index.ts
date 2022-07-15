@@ -37,7 +37,7 @@ let uniFetch: Fetch;
 /* istanbul ignore next */
 if (nodeMajor >= 18) {
   uniFetch = globalThis;
-} else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 5)) {
+} else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
   // TODO: Type this as undici once it has the same type signature as the globals
   uniFetch = require("undici");
 } else {
