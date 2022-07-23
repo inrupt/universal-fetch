@@ -1,6 +1,6 @@
 <!-- When fixing a bug: -->
 
-This PR fixes #<issue ID>.
+This PR fixes bug #.
 
 - [ ] I've added a unit test to test for potential regressions of this bug.
 - [ ] The changelog has been updated, if applicable.
@@ -16,22 +16,17 @@ This PR fixes #<issue ID>.
 - [ ] Relevant documentation, if any, has been written/updated.
 - [ ] The changelog has been updated, if applicable.
 - [ ] New functions/types have been exported in `index.ts`, if applicable.
-- [ ] New modules (i.e. new `.ts` files) are listed in the `exports` field in `package.json`, if applicable.
-- [ ] New modules (i.e. new `.ts` files) are listed in the `typedocOptions.entryPoints` field in `tsconfig.json`, if applicable.
 - [ ] Commits in this PR are minimal and [have descriptive commit messages](https://chris.beams.io/posts/git-commit/).
 
 <!-- When cutting a release: -->
 
 This PR bumps the version to <version number>.
 
-# Checklist
+# Release Steps
 
-- [ ] I used `npm version <major|minor|patch>` to update `package.json`, inspecting the changelog to determine if the release was major, minor or patch.
-- [ ] The CHANGELOG has been updated to show version and release date - https://keepachangelog.com/en/1.0.0/.
-- [ ] `@since X.Y.Z` annotations have been added to new APIs.
-- [ ] The **only** commits in this PR are:
-  - the CHANGELOG update.
-  - the version update.
-  - `@since` annotations.
-- [ ] I will make sure **not** to squash these commits, but **rebase** instead.
-- [ ] Once this PR is merged, I will push the tag created by `npm version ...` (e.g. `git push origin vX.Y.Z`).
+1. Look at the [CHANGELOG.md](../CHANGELOG.md) to determine whether the release should be a major, minor, or patch release. Coordinate with the team to ensure the next version is agreed upon.
+2. Run `npm version <major|minor|patch>` with the decided on version.
+3. Update the `CHANGELOG.md` to release the latest the version, and set the release date.
+4. Commit the changes on a `release/vX.Y.Z` branch
+5. Push to GitHub, create a PR, and merge once CI passes.
+6. Create a release on GitHub for the new version, using a combination of the release notes from the `CHANGELOG.md` and the automatically generated changes.
