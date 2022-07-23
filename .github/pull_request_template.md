@@ -25,7 +25,7 @@ This PR bumps the version to <version number>.
 # Release Steps
 
 1. Look at the [CHANGELOG.md](../CHANGELOG.md) to determine whether the release should be a major, minor, or patch release. Coordinate with the team to ensure the next version is agreed upon.
-2. Run `npm run lerna-version -- <major|minor|patch>` with the decided on version.
+2. Run `npm version <major|minor|patch>` with the decided on version.
 3. Update the `CHANGELOG.md` to release the latest the version, and set the release date.
 4. Commit the changes on a `release/vX.Y.Z` branch
 5. Push to GitHub, create a PR, and merge once CI passes.
