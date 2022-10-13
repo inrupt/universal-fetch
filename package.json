@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "rollup --config rollup.config.js",
+    "build": "rollup --config rollup.config.mjs",
     "clean": "rimraf umd dist",
     "docs:build": "typedoc",
     "lint": "npm run lint:eslint -- --cache --fix && npm run lint:prettier -- --write",
