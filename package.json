@@ -59,7 +59,7 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/dotenv-flow": "^3.2.0",
     "@types/jest": "^28.1.3",
-    "@types/node": "^18.11.2",
+    "@types/node": "^18.11.3",
     "dotenv-flow": "^3.2.0",
     "jest": "^28.1.1",
     "jest-environment-node": "^29.2.1",
