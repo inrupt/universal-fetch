@@ -74,6 +74,6 @@
   },
   "dependencies": {
     "node-fetch": "^2.6.7",
-    "undici": "^5.11.0"
+    "undici": "^5.12.0"
   }
 }
