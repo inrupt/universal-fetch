@@ -1,21 +1,23 @@
 name: CI
 
 on: [push]
-
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18, 16, 14]
+        node-version: [18.x, 16.x, 14.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "npm"
       - run: npm ci
-      - run: npm run build
       - run: npm test
 
   lint:
-    uses: inrupt/javascript-style-configs/.github/workflows/reusable-lint.yml@v1.0.0
+    uses: inrupt/typescript-sdk-tools/.github/workflows/reusable-lint.yml@v1.4.2
