@@ -6,6 +6,10 @@ The following changes have been implemented but not released yet:
 
 ## [Unreleased]
 
+The following changes have been implemented but not released yet:
+
+## 0.1.0 - 2022-12-14
+
 ### New features
 
 Introducing our fetch shim, where we use node-fetch as a polyfill on node 14,
