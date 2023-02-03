@@ -88,4 +88,8 @@ function createMock() {
   return mocks;
 }
 
+// Function for determining number of calls made to Mock before cleared
+const numberOfCalls = () => mocks.calls.length > 0;
+
+
 module.exports = { mocks, createMock };
