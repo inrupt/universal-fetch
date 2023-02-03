@@ -1,0 +1,20 @@
+{
+  "name": "@inrupt/universal-fetch-mocking",
+  "version": "1.5.3",
+  "description": "This submodule provides a mock of universal-fetch.",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs"
+  },
+  "author": "Inrupt <devtools-team@inrupt.com>",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js"
+    }
+  }
+}
