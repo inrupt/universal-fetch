@@ -16,5 +16,8 @@
     ".": {
       "require": "./dist/index.js"
     }
+  },
+  "dependencies": {
+    "@inrupt/solid-client": "^1.25.1"
   }
 }

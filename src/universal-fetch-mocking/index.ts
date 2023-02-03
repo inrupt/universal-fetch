@@ -84,7 +84,7 @@ type UniversalFetchMock = {
   fetch: (handler) => typeof fetch;
 };
 
-function createMock() {
+export function createMock() {
   return mocks;
 }
 
@@ -92,4 +92,4 @@ function createMock() {
 const numberOfCalls = () => mocks.calls.length > 0;
 
 
-module.exports = { mocks, createMock };
+export default mocks;
