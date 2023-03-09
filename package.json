@@ -39,11 +39,7 @@
       "import": "./dist/index.mjs"
     }
   },
-  "browser": {
-    "./dist/index.js": "./dist/index-browser.js",
-    "./dist/index.es.js": "./dist/index-browser.es.js",
-    "./dist/index.mjs": "./dist/index-browser.mjs"
-  },
+  "browser": "./dist/index-browser.js",
   "files": [
     "dist",
     "umd"
