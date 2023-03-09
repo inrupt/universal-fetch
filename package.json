@@ -39,6 +39,10 @@
       "import": "./dist/index.mjs"
     }
   },
+  "browser": {
+    "undici": false,
+    "node-fetch": false
+  },
   "files": [
     "dist",
     "umd"
