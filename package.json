@@ -40,9 +40,9 @@
     }
   },
   "browser": {
-    "dist/index.js": "./dist/index-browser.js",
-    "dist/index.es.js": "./dist/index-browser.es.js",
-    "dist/index.mjs": "./dist/index-browser.mjs"
+    "./dist/index.js": "./dist/index-browser.js",
+    "./dist/index.es.js": "./dist/index-browser.es.js",
+    "./dist/index.mjs": "./dist/index-browser.mjs"
   },
   "files": [
     "dist",
