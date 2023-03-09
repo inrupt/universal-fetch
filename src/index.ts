@@ -26,28 +26,52 @@ interface Fetch {
   Response: typeof globalThis.Response;
 }
 
-const nodeVersion = process.versions.node.split(".");
-const nodeMajor = Number(nodeVersion[0]);
-const nodeMinor = Number(nodeVersion[1]);
+// const nodeVersion = process.versions.node.split(".");
+// const nodeMajor = Number(nodeVersion[0]);
+// const nodeMinor = Number(nodeVersion[1]);
 
-let uniFetch: Fetch;
+// let uniFetch: Fetch;
 
-// Each branch is pre-determined based on node version and hence any test on a given node version will
-// not reach a particular branch.
-/* istanbul ignore next */
-if (nodeMajor >= 18) {
+// /* istanbul ignore next */
+// if (nodeMajor >= 18) {
+//   uniFetch = globalThis;
+// } else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
+//   // TODO: Type this as undici once it has the same type signature as the globals
+//   uniFetch = require("undici");
+// } else {
+//   // TODO: Fix this type casting once node-fetch has the same type signature as the globals
+//   uniFetch = {
+//     fetch: require("node-fetch").default as typeof globalThis.fetch,
+//     Headers: require("node-fetch").Headers as typeof globalThis.Headers,
+//     Request: require("node-fetch").Request as typeof globalThis.Request,
+//     Response: require("node-fetch").Response as typeof globalThis.Response,
+//   };
+// }
+
+// export default uniFetch.fetch;
+// export const { fetch, Request, Response, Headers } = uniFetch;
+
+let uniFetch;
+if (typeof window !== "undefined") {
   uniFetch = globalThis;
-} else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
-  // TODO: Type this as undici once it has the same type signature as the globals
-  uniFetch = require("undici");
 } else {
-  // TODO: Fix this type casting once node-fetch has the same type signature as the globals
-  uniFetch = {
-    fetch: require("node-fetch").default as typeof globalThis.fetch,
-    Headers: require("node-fetch").Headers as typeof globalThis.Headers,
-    Request: require("node-fetch").Request as typeof globalThis.Request,
-    Response: require("node-fetch").Response as typeof globalThis.Response,
-  };
+  // Each branch is pre-determined based on node version and hence any test on a given node version will
+  // not reach a particular branch.
+  const nodeVersion = process.versions.node.split(".");
+  const nodeMajor = Number(nodeVersion[0]);
+  const nodeMinor = Number(nodeVersion[1]);
+  if (nodeMajor >= 18) {
+    uniFetch = globalThis;
+  } else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
+    uniFetch = require("undici");
+  } else {
+    uniFetch = {
+      fetch: require("node-fetch").default,
+      Headers: require("node-fetch").Headers,
+      Request: require("node-fetch").Request,
+      Response: require("node-fetch").Response,
+    };
+  }
 }
 
 export default uniFetch.fetch;
