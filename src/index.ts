@@ -19,6 +19,14 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Undici from "undici";
+// @ts-ignore
+import NodeFetch, {
+  Headers as NodeHeaders,
+  Request as NodeRequest,
+  Response as NodeResponse,
+} from "node-fetch";
+
 interface Fetch {
   fetch: typeof globalThis.fetch;
   Headers: typeof globalThis.Headers;
@@ -63,16 +71,15 @@ if (typeof window !== "undefined") {
   if (nodeMajor >= 18) {
     uniFetch = globalThis;
   } else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
-    uniFetch = require("undici");
+    uniFetch = Undici as any;
   } else {
     uniFetch = {
-      fetch: require("node-fetch").default,
-      Headers: require("node-fetch").Headers,
-      Request: require("node-fetch").Request,
-      Response: require("node-fetch").Response,
+      fetch: NodeFetch,
+      Headers: NodeHeaders,
+      Request: NodeRequest,
+      Response: NodeResponse,
     };
   }
 }
-
 export default uniFetch.fetch;
 export const { fetch, Request, Response, Headers } = uniFetch;
