@@ -18,6 +18,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+import {
+  fetch as UndiciFetch,
+  Headers as UndiciHeaders,
+  Request as UndiciRequest,
+  Response as UndiciResponse,
+} from "undici";
+import NodeFetch, {
+  Headers as NodeHeaders,
+  Request as NodeRequest,
+  Response as NodeResponse,
+} from "node-fetch";
 
 interface Fetch {
   fetch: typeof globalThis.fetch;
@@ -39,14 +50,19 @@ if (nodeMajor >= 18) {
   uniFetch = globalThis;
 } else if (nodeMajor > 16 || (nodeMajor === 16 && nodeMinor >= 8)) {
   // TODO: Type this as undici once it has the same type signature as the globals
-  uniFetch = require("undici");
+  uniFetch = {
+    fetch: UndiciFetch as unknown as Fetch["fetch"],
+    Headers: UndiciHeaders as unknown as Fetch["Headers"],
+    Request: UndiciRequest as unknown as Fetch["Request"],
+    Response: UndiciResponse as unknown as Fetch["Response"],
+  };
 } else {
   // TODO: Fix this type casting once node-fetch has the same type signature as the globals
   uniFetch = {
-    fetch: require("node-fetch").default as typeof globalThis.fetch,
-    Headers: require("node-fetch").Headers as typeof globalThis.Headers,
-    Request: require("node-fetch").Request as typeof globalThis.Request,
-    Response: require("node-fetch").Response as typeof globalThis.Response,
+    fetch: NodeFetch as unknown as Fetch["fetch"],
+    Headers: NodeHeaders as unknown as Fetch["Headers"],
+    Request: NodeRequest as unknown as Fetch["Request"],
+    Response: NodeResponse as unknown as Fetch["Response"],
   };
 }
 
