@@ -38,6 +38,11 @@ const tsconfig = JSON.parse(
   readFileSync("./tsconfig.json", "utf-8").replace(/^\s*\/\/\s.*$/gm, "")
 );
 
+const external = [
+  ...Object.keys(pkg.dependencies || {}),
+  "@inrupt/solid-client-authn-browser",
+];
+
 const plugins = [
   typescript({
     // Use our own version of TypeScript, rather than the one bundled with the plugin:
@@ -74,7 +79,7 @@ export default [
       },
     ],
     plugins,
-    external: [],
+    external,
   },
   {
     input: "./src/index-browser.ts",
@@ -103,6 +108,6 @@ export default [
       },
     ],
     plugins,
-    external: [],
+    external,
   },
 ];
