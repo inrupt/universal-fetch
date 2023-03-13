@@ -6,7 +6,6 @@
   "scripts": {
     "build": "rollup --config rollup.config.mjs",
     "clean": "rimraf umd dist",
-    "docs:build": "typedoc",
     "lint": "npm run lint:eslint -- --cache --fix && npm run lint:prettier -- --write",
     "lint:ci": "npm run lint:eslint && npm run lint:prettier -- --check",
     "lint:eslint": "eslint src",
@@ -28,7 +27,7 @@
     "universal",
     "isomorphic"
   ],
-  "homepage": "https://docs.inrupt.com/client-libraries/universal-fetch/",
+  "homepage": "https://github.com/inrupt/universal-fetch",
   "bugs": "https://github.com/inrupt/universal-fetch/issues",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -68,8 +67,6 @@
     "rollup": "^3.15.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^28.0.5",
-    "typedoc": "^0.23.23",
-    "typedoc-plugin-markdown": "^3.13.6",
     "typescript": "^4.9.4"
   },
   "dependencies": {
