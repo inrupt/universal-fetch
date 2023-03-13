@@ -6,6 +6,8 @@ The following changes have been implemented but not released yet:
 
 ## [Unreleased]
 
+## [1.0.1](https://github.com/inrupt/universal-fetch/releases/tag/v1.0.1) - 2023-03-13
+
 ### Bugfixes
 
 - Fixes ESM build on Node 16: an incorrect use of dynamic imports broke the ESM
