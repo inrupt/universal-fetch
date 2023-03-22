@@ -1,0 +1,9 @@
+{
+  "extends": ["@inrupt/eslint-config-lib", "next/core-web-vitals"],
+  "no-shadow": [
+    "warn",
+    {
+      "allow": ["Headers"]
+    }
+  ]
+}

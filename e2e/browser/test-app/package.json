@@ -1,0 +1,29 @@
+{
+  "name": "e2e-test-app",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inrupt/template-web-demo.git"
+  },
+  "scripts": {
+    "audit": "npm audit --audit-level=moderate",
+    "audit-licenses": "license-checker --production --failOn \"AGPL-1.0-only; AGPL-1.0-or-later; AGPL-3.0-only; AGPL-3.0-or-later; Beerware; CC-BY-NC-1.0; CC-BY-NC-2.0; CC-BY-NC-2.5; CC-BY-NC-3.0; CC-BY-NC-4.0; CC-BY-NC-ND-1.0; CC-BY-NC-ND-2.0; CC-BY-NC-ND-2.5; CC-BY-NC-ND-3.0; CC-BY-NC-ND-4.0; CC-BY-NC-SA-1.0; CC-BY-NC-SA-2.0; CC-BY-NC-SA-2.5; CC-BY-NC-SA-3.0; CC-BY-NC-SA-4.0; CPAL-1.0; EUPL-1.0; EUPL-1.1; EUPL-1.1;  GPL-1.0-only; GPL-1.0-or-later; GPL-2.0-only;  GPL-2.0-or-later; GPL-3.0; GPL-3.0-only; GPL-3.0-or-later; SISSL;  SISSL-1.2; WTFPL\"",
+    "build": "next build",
+    "dev": "next dev",
+    "ci": "npm run lint && npm run test",
+    "lint": "eslint pages --ext .js,.jsx",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@inrupt/universal-fetch": "file:../../../",
+    "next": "^13.0.5",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "eslint-config-next": "^13.0.5",
+    "typescript": "^4.9.4"
+  }
+}

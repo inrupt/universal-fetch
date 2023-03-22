@@ -1,0 +1,53 @@
+name: End-to-end browser-based tests
+
+on:
+  push:
+
+env:
+  CI: true
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  e2e-browser:
+    # Dependabot cannot access secrets, so it doesn't have a token to authenticate to ESS.
+    # Since all the other jobs of this workflow depend on this one, skipping it should
+    # skip the entire workflow.
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ matrix.environment-name }}
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: true
+      matrix:
+        environment-name: ["ESS PodSpaces"]
+        experimental: [false]
+        include:
+          - environment-name: "ESS Dev-Next"
+            experimental: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps
+      - run: npm run test:e2e:browser:setup
+      - run: npm run test:e2e:browser
+      - name: Archive browser-based end-to-end test request logs
+        uses: actions/upload-artifact@v3
+        if: failure()
+        continue-on-error: true
+        with:
+          name: playwright-output
+          path: test-results/
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        continue-on-error: true
+        with:
+          name: dist
+          path: dist

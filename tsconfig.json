@@ -18,5 +18,5 @@
     "stripInternal": true
   },
   "include": ["src/**/*.ts", ".eslintrc.js"],
-  "exclude": ["**/node_modules", "dist/*", "umd/*"]
+  "exclude": ["**/node_modules", "dist/*", "umd/*", "e2e/*/**/*.ts"]
 }
