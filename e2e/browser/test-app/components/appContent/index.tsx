@@ -19,7 +19,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import { fetch as crossFetch, Headers } from "@inrupt/universal-fetch";
+import { fetch as uniFetch, Headers } from "@inrupt/universal-fetch";
 import { useState } from "react";
 
 const OPENID_CONFIG_FILE_URL = "https://login.inrupt.com/.well-known/openid-configuration"
@@ -30,7 +30,7 @@ export default function Home() {
   headers.append("Content-Type", "application/json");
 
   const fetchData = async (options: RequestInit) => {
-    crossFetch(
+    uniFetch(
       OPENID_CONFIG_FILE_URL,
       options
     )
