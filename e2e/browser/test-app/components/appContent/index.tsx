@@ -22,23 +22,18 @@
 import { fetch as uniFetch, Headers } from "@inrupt/universal-fetch";
 import { useState } from "react";
 
-const OPENID_CONFIG_FILE_URL = "https://login.inrupt.com/.well-known/openid-configuration"
+const OPENID_CONFIG_FILE_URL =
+  "https://login.inrupt.com/.well-known/openid-configuration";
 
 export default function Home() {
   const [fetchedData, setFetchedData] = useState("");
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
-  const fetchData = async (options: RequestInit) => {
-    uniFetch(
-      OPENID_CONFIG_FILE_URL,
-      options
-    )
+  const fetchData = async (options: RequestInit) =>
+    uniFetch(OPENID_CONFIG_FILE_URL, options)
       .then((response: Response) => response.json())
-      .then((response: Response) =>
-        setFetchedData(JSON.stringify(response, null, 2))
-      );
-  };
+      .then((data: any) => setFetchedData(JSON.stringify(data, null, 2)));
 
   return (
     <div>
@@ -46,7 +41,8 @@ export default function Home() {
         <code>@inrupt/universal-fetch</code> test browser app
       </h1>
       <p>
-        Content-type: <code data-testid="content-type">{headers.get("Content-Type")}</code>
+        Content-type:{" "}
+        <code data-testid="content-type">{headers.get("Content-Type")}</code>
       </p>
       <button onClick={() => fetchData({ headers })}>Fetch content</button>
       <pre data-testid="data">{fetchedData}</pre>
