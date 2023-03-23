@@ -2,6 +2,9 @@ require("@rushstack/eslint-patch/modern-module-resolution");
 
 module.exports = {
   extends: ["@inrupt/eslint-config-lib"],
+  parserOptions: {
+    project: "./tsconfig.json",
+  },
   rules: {
     // Since we are re-exporting fetch, Request, Response, Headers
     // shadowing crops up a lot in this package
