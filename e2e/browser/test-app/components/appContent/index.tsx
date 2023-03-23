@@ -26,7 +26,7 @@ const OPENID_CONFIG_FILE_URL =
   "https://login.inrupt.com/.well-known/openid-configuration";
 
 export default function Home() {
-  const [fetchedData, setFetchedData] = useState("");
+  const [fetchedData, setFetchedData] = useState<string>();
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
@@ -45,7 +45,7 @@ export default function Home() {
         <code data-testid="content-type">{headers.get("Content-Type")}</code>
       </p>
       <button onClick={() => fetchData({ headers })}>Fetch content</button>
-      <pre data-testid="data">{fetchedData}</pre>
+      {fetchedData && <pre data-testid="data">{fetchedData}</pre>}
     </div>
   );
 }
