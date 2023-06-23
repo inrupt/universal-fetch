@@ -55,7 +55,7 @@
     "url": "https://github.com/inrupt/universal-fetch.git"
   },
   "devDependencies": {
-    "@inrupt/eslint-config-lib": "^1.5.5",
+    "@inrupt/eslint-config-lib": "^2.0.0",
     "@playwright/test": "^1.31.2",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/dotenv-flow": "^3.2.0",
