@@ -6,6 +6,14 @@ The following changes have been implemented but not released yet:
 
 ## [Unreleased]
 
+## [1.0.2](https://github.com/inrupt/universal-fetch/releases/tag/v1.0.2) - 2023-07-05
+
+### Bugfixes
+
+- Adds a relative `./` paths in the browser entry for the package.json. This
+  ensures that rollup correctly resolves to the correct files when generating
+  browser bundles.
+
 ## [1.0.1](https://github.com/inrupt/universal-fetch/releases/tag/v1.0.1) - 2023-03-13
 
 ### Bugfixes
