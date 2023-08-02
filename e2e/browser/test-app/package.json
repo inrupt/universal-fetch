@@ -13,7 +13,8 @@
     "dev": "next dev",
     "ci": "npm run lint && npm run test",
     "lint": "eslint pages --ext .js,.jsx",
-    "start": "next start"
+    "start": "next start",
+    "test:esbuild": "esbuild components/appContent/index.tsx --bundle"
   },
   "dependencies": {
     "@inrupt/universal-fetch": "file:../../../",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
+    "esbuild": "^0.18.17",
     "eslint-config-next": "^13.0.5",
     "typescript": "^4.9.4"
   }
