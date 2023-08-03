@@ -23,4 +23,4 @@ jobs:
         run: npm run test:esbuild
 
   lint:
-    uses: inrupt/typescript-sdk-tools/.github/workflows/reusable-lint.yml@v2.0.2
+    uses: inrupt/typescript-sdk-tools/.github/workflows/reusable-lint.yml@v2.1.1
