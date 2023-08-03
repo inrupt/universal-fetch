@@ -17,7 +17,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - run: npm ci
+      - run: npm run build
       - run: npm test
+      - if: ${{ matrix.node-version != '14.x' }}
+        run: npm run test:esbuild
 
   lint:
     uses: inrupt/typescript-sdk-tools/.github/workflows/reusable-lint.yml@v2.1.1
