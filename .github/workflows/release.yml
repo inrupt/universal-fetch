@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - v[0-9]+.[0-9]+.[0-9]+
+      - v[0-9]+.[0-9]+.[0-9]+-alpha.[0-9]+
+      - v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+
 
 jobs:
   publish-npm:
@@ -16,6 +18,15 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           cache: "npm"
       - run: npm ci
-      - run: npm publish --access public
+      - if: ${{ contains(github.ref_name, 'beta') }}
+        run: npm publish --access public --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.INRUPT_NPM_TOKEN }}
+      - if: ${{ contains(github.ref_name, 'alpha') }}
+        run: npm publish --access public --tag alpha
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.INRUPT_NPM_TOKEN }}
+      - if: ${{ !contains(github.ref_name, 'alpha') && !contains(github.ref_name, 'beta') }}
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.INRUPT_NPM_TOKEN }}
