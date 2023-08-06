@@ -6,6 +6,13 @@ The following changes have been implemented but not released yet:
 
 ## [Unreleased]
 
+## [1.0.3](https://github.com/inrupt/universal-fetch/releases/tag/v1.0.3) - 2023-08-07
+
+### Bugfixes
+
+- Adds a `browser` entry to the exports field. This ensures that esbuild correctly
+  resolves to the correct files when generating browser bundles.
+
 ## [1.0.2](https://github.com/inrupt/universal-fetch/releases/tag/v1.0.2) - 2023-07-05
 
 ### Bugfixes
