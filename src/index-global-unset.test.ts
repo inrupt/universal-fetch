@@ -20,9 +20,10 @@
 //
 import * as uniFetch from "./index";
 
-// Testing that the deletion of the global after the import
+// @ts-expect-error Testing that the deletion
+// of the global after the import
 // does not affect the imported functions
-delete (globalThis as any).fetch;
+delete globalThis.fetch;
 
 describe("exports", () => {
   it("Should always have fetch, headers, request and response as functions", () => {
