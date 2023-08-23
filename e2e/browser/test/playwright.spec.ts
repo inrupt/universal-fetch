@@ -24,7 +24,7 @@ test("Content-Type is correct", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByTestId("content-type")).toContainText(
-    "application/json"
+    "application/json",
   );
 });
 
@@ -34,6 +34,6 @@ test("fetches content and renders to page", async ({ page }) => {
   await page.getByRole("button").click();
 
   await expect(page.getByTestId("data")).toContainText(
-    `"authorization_endpoint": "https://login.inrupt.com/authorization"`
+    `"authorization_endpoint": "https://login.inrupt.com/authorization"`,
   );
 });

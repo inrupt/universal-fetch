@@ -65,7 +65,7 @@
     "url": "https://github.com/inrupt/universal-fetch.git"
   },
   "devDependencies": {
-    "@inrupt/eslint-config-lib": "^2.0.0",
+    "@inrupt/eslint-config-lib": "^2.1.3",
     "@playwright/test": "^1.31.2",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/dotenv-flow": "^3.2.0",
@@ -75,7 +75,7 @@
     "dotenv-flow": "^3.2.0",
     "jest": "^28.1.1",
     "jest-environment-node": "^29.4.3",
-    "prettier": "2.8.8",
+    "prettier": "3.0.2",
     "rimraf": "^5.0.0",
     "rollup": "^3.15.0",
     "rollup-plugin-typescript2": "^0.35.0",
