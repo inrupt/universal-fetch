@@ -22,6 +22,7 @@ import * as uniFetch from "./index";
 
 // Testing that the deletion of the global after the import
 // does not affect the imported functions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (globalThis as any).fetch;
 
 describe("exports", () => {
