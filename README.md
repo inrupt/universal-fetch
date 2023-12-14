@@ -1,3 +1,5 @@
+> :warning: This package is deprecated now that Node 16 has reached EOL. `fetch` now exists as a global function Node 18 and higher so the global `fetch` function should be used instead of this package.
+
 # Universal Fetch
 
 `@inrupt/universal-fetch` is a TypeScript library for accessing the `fetch` method from any environment.
